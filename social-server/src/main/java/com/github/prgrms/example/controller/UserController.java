@@ -3,6 +3,7 @@ package com.github.prgrms.example.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,5 +39,10 @@ public class UserController {
 	public Map<String, String> Post(@RequestBody User user) {
 		System.out.println("\n\nClass: UserController\nMethod: post\n");
 		return userService.join(user);
+	}
+	
+	@GetMapping("/api/user")
+	public Map<String, String> Get(){
+		return userService.allList();
 	}
 }

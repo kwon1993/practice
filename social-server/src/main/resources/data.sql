@@ -1,1 +1,2 @@
-INSERT INTO USER (EMAIL, PASSWORD) VALUES ('test@email.com', 'password');
+INSERT INTO USER (PRINCIPAL, CREDENTIALS) VALUES ('test@email.com', 'password');
+INSERT INTO USER (PRINCIPAL, CREDENTIALS) VALUES ('test2@email.com', 'password2');

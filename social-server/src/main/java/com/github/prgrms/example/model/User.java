@@ -4,7 +4,12 @@ public class User {
 
 	private String principal;
 	private String credentials;
-		
+	
+	public User() {
+		this.principal = "";
+		this.credentials = "";
+	}
+	
 	public User(String principal, String credentials) {
 		this.principal = principal;
 		this.credentials = credentials;

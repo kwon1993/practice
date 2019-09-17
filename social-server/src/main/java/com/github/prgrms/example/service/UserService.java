@@ -1,5 +1,7 @@
 package com.github.prgrms.example.service;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +18,18 @@ public class UserService {
 	
 	public Map<String, String> join(User user) {
 		return userRepository.join(user);
+	}
+	
+	public Map<String, String> allList(){
+		Iterator<User> userList = userRepository.loadAll().iterator();
+		Map<String, String> map = new HashMap<String, String>();
+		User user = new User();
+		
+		while(userList.hasNext()) {
+			user = userList.next();
+			map.put(user.getPrincipal(), user.getCredentials());
+		}
+		
+		return map;
 	}
 }
