@@ -1,16 +1,15 @@
 package com.github.prgrms.example.model;
 
-public class User {
+public class UserVO {
 
 	private String principal;
 	private String credentials;
 	
-	public User() {
-		this.principal = "";
-		this.credentials = "";
+	public UserVO() {
+		this("","");
 	}
 	
-	public User(String principal, String credentials) {
+	public UserVO(String principal, String credentials) {
 		this.principal = principal;
 		this.credentials = credentials;
 	}

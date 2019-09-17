@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.github.prgrms.example.model.User;
+import com.github.prgrms.example.model.UserVO;
 
 
 @Repository
@@ -19,7 +19,7 @@ public class UserRepository {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	public Map<String, String> join(User user) {
+	public Map<String, String> join(UserVO user) {
 		String sql = "INSERT INTO USER (EMAIL, PASSWORD) VALUES (?, ?)";
 		Map<String, String> map = new HashMap<>();
 		try {
@@ -35,14 +35,14 @@ public class UserRepository {
 		}
 	}
 	
-	public List<User> loadAll(){
+	public List<UserVO> loadAll(){
 		return jdbcTemplate.query("SELECT * FROM USER", (resultSet, i) -> {
 			return toUser(resultSet);
 		});
 	}
 	
-	private User toUser(ResultSet resultSet) throws SQLException{
-		User user = new User(resultSet.getString("principal"), resultSet.getString("credentials"));
+	private UserVO toUser(ResultSet resultSet) throws SQLException{
+		UserVO user = new UserVO(resultSet.getString("principal"), resultSet.getString("credentials"));
 		return user;
 	}
 }
