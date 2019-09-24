@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.prgrms.example.model.EmailCheckDto;
 import com.github.prgrms.example.model.RequestDto;
 import com.github.prgrms.example.model.ResponseDto;
 import com.github.prgrms.example.model.UserVO;
@@ -27,8 +28,17 @@ public class UserService {
 	}
 	
 	public UserVO userInfo(String email) {
-		return null;
+		return userRepository.userInfo(email);
 	}
+	
+	public EmailCheckDto emailCheck(String email) {
+		if(userRepository.emailCheck(email).getEmail() == null || userRepository.emailCheck(email).getEmail().isEmpty()) {
+			return new EmailCheckDto(email, false);
+		} else {
+			return new EmailCheckDto(email, true);
+		}
+	}
+	
 	
 	//TODO UserVO 라는 유의미한 객체가 있는데 MAP으로 객체를 주고받는건 잘못됌.
 //	public Map<String, String> allList(){

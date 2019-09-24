@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.prgrms.example.model.EmailCheckDto;
 import com.github.prgrms.example.model.RequestDto;
 import com.github.prgrms.example.model.ResponseDto;
 import com.github.prgrms.example.model.UserVO;
@@ -64,12 +65,12 @@ public class UserController {
 	
 	@GetMapping("/user/info/{email}")
 	public UserVO userInfo(@PathVariable("email") String email) {
-		return null;
+		return userService.userInfo(email);
 	}
 	
 	@GetMapping("/user/email/{email}")
-	public Map<String, String> EmailCheck(){
-		return null;
+	public EmailCheckDto EmailCheck(@PathVariable("email") String email){
+		return userService.emailCheck(email);
 	}
 	
 }
