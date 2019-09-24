@@ -3,6 +3,7 @@ package com.github.prgrms.example.repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -32,9 +33,10 @@ public class UserRepository {
 		}
 	}
 	
-	public UserVO userInfo(String email) {
+	public List<UserVO> userInfo(String email) {
 //		return jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE EMAIL = ?", email, new UserVO());
 		return null;
+		
 	}
 	
 	public List<UserVO> loadAll(){
@@ -44,7 +46,17 @@ public class UserRepository {
 	}
 	
 	private UserVO toUser(ResultSet resultSet) throws SQLException{
-		UserVO user = new UserVO(resultSet.getString("name"), resultSet.getString("email"), resultSet.getString("password"));
+		UserVO user = new UserVO(resultSet.getLong("SEQ"), resultSet.getString("NAME"), resultSet.getString("EMAIL"),
+				resultSet.getString("PASSWORD"), resultSet.getString("PROFILE_IMAGE_URL"), resultSet.getInt("LOGIN_COUNT"),
+				resultSet.getDate("LAST_LOGIN_AT"), resultSet.getDate("CREATE_AT"));
+//		Optional<String> empty = Optional.empty();
+//		
+//		if(user.getProfileImageUrl() == null) {
+//			user.setProfileImageUrl("None");
+//		}
+//		if(user.getLastLoginAt() == null) {
+//			
+//		}
 //		UserVO user = new UserVO(resultSet.getString("principal"), resultSet.getString("credentials"));
 		return user;
 	}

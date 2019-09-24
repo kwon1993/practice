@@ -62,7 +62,7 @@ public class UserController {
 		return null;
 	}
 	
-	@GetMapping("/user/{email}")
+	@GetMapping("/user/info/{email}")
 	public UserVO userInfo(@PathVariable("email") String email) {
 		return null;
 	}

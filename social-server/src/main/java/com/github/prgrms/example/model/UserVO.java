@@ -31,6 +31,17 @@ public class UserVO {
 		this(name, email, password);
 		this.profileImageUrl = profileImageUrl;
 	}
+	
+	public UserVO(long seq, String name, String email, String password, String profileImageUrl, int loginCount, Date lastLoginAt, Date createAt) {
+		this.seq = seq;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.profileImageUrl = profileImageUrl;
+		this.loginCount = loginCount;
+		this.lastLoginAt = lastLoginAt;
+		this.createAt = createAt;
+	}
 
 	public long getSeq() {
 		return seq;
