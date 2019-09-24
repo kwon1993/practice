@@ -2,6 +2,7 @@ package com.github.prgrms.example.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.github.prgrms.example.model.EmailCheckDto;
 import com.github.prgrms.example.model.ResponseDto;
 import com.github.prgrms.example.model.UserVO;
 
@@ -49,16 +51,28 @@ public class UserRepository {
 		return user;
 	}
 	
-	public UserVO emailCheck(String email) {
-		UserVO user = this.jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE EMAIL = ?", new Object[] {email}, new RowMapper<UserVO>() {
-			public UserVO mapRow(ResultSet resultSet, int rowNum) throws SQLException{
-				UserVO user = new UserVO(resultSet.getLong("SEQ"), resultSet.getString("NAME"), resultSet.getString("EMAIL"),
-						resultSet.getString("PASSWORD"), resultSet.getString("PROFILE_IMAGE_URL"), resultSet.getInt("LOGIN_COUNT"),
-						resultSet.getDate("LAST_LOGIN_AT"), resultSet.getDate("CREATE_AT"));
-				return user;
-			}
+//	public UserVO emailCheck(String email) {
+//		UserVO user = this.jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE EMAIL = ?", new Object[] {email}, new RowMapper<UserVO>() {
+//			public UserVO mapRow(ResultSet resultSet, int rowNum) throws SQLException{
+//				UserVO user = new UserVO(resultSet.getLong("SEQ"), resultSet.getString("NAME"), resultSet.getString("EMAIL"),
+//						resultSet.getString("PASSWORD"), resultSet.getString("PROFILE_IMAGE_URL"), resultSet.getInt("LOGIN_COUNT"),
+//						resultSet.getDate("LAST_LOGIN_AT"), resultSet.getDate("CREATE_AT"));
+//				return user;
+//			}
+//		});
+//		return user;
+//	}
+	
+	public EmailCheckDto emailCheck(String email) {
+		List<UserVO> userList = jdbcTemplate.query("SELECT EMAIL FROM USERS", (resultSet, i) -> {
+			return allUser(resultSet);
 		});
-		return user;
+		for(UserVO user : userList) {
+			if(user.getEmail().equals(email)) {
+				return new EmailCheckDto(email, false);
+			}
+		}
+		return new EmailCheckDto(email, true);
 	}
 	
 	

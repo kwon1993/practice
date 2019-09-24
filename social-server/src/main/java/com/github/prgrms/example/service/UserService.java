@@ -32,11 +32,13 @@ public class UserService {
 	}
 	
 	public EmailCheckDto emailCheck(String email) {
-		if(userRepository.emailCheck(email).getEmail() == null || userRepository.emailCheck(email).getEmail().isEmpty()) {
-			return new EmailCheckDto(email, false);
-		} else {
-			return new EmailCheckDto(email, true);
-		}
+		return userRepository.emailCheck(email);
+		
+//		if(userRepository.emailCheck(email).getEmail() == null || userRepository.emailCheck(email).getEmail().isEmpty()) {
+//			return new EmailCheckDto(email, true);
+//		} else {
+//			return new EmailCheckDto(email, false);
+//		}
 	}
 	
 	
